@@ -15,8 +15,8 @@ MP3.
 Clone o repositorio e entre na pasta do projeto:
 
 ```powershell
-git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-cd SEU_REPOSITORIO
+git clone https://github.com/caiocdias/baixar_audio_youtube
+cd baixar_audio_youtube
 ```
 
 Crie um ambiente virtual:
@@ -91,25 +91,8 @@ python baixar_audio_youtube.py "URL_DA_PLAYLIST" --playlist -o musicas
 | `-q`, `--qualidade` | Qualidade do MP3 em kbps. Padrao: `192`. |
 | `--playlist` | Permite baixar playlists. Sem essa opcao, baixa apenas um video. |
 
-## Solucao de problemas
+## Autor
 
-Se aparecer erro dizendo que `yt-dlp` nao foi encontrado, instale novamente:
+Desenvolvido por Caio Cezar Dias.
 
-```powershell
-python -m pip install -r requirements.txt
-```
-
-Se aparecer erro dizendo que `ffmpeg` nao foi encontrado, confirme se ele esta
-instalado:
-
-```powershell
-ffmpeg -version
-```
-
-Se o comando nao for reconhecido, instale o FFmpeg com:
-
-```powershell
-winget install Gyan.FFmpeg
-```
-
-Depois disso, feche e abra o terminal novamente para atualizar o `PATH`.
+Contato: caiocd007@gmail.com
