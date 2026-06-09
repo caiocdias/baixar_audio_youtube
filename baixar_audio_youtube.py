@@ -54,6 +54,7 @@ def baixar_audio(url: str, pasta_saida: Path, qualidade: str, permitir_playlist:
         "format": "bestaudio/best",
         "outtmpl": str(pasta_saida / "%(title).200B.%(ext)s"),
         "noplaylist": not permitir_playlist,
+        "ignoreerrors": permitir_playlist,
         "windowsfilenames": True,
         "postprocessors": [
             {
@@ -66,7 +67,14 @@ def baixar_audio(url: str, pasta_saida: Path, qualidade: str, permitir_playlist:
 
     try:
         with yt_dlp.YoutubeDL(opcoes) as ydl:
-            ydl.download([url])
+            resultado = ydl.download([url])
+            if resultado and permitir_playlist:
+                print(
+                    "Aviso: um ou mais itens da playlist falharam e foram pulados.",
+                    file=sys.stderr,
+                )
+            elif resultado:
+                sys.exit(resultado)
     except Exception as exc:
         print(f"Erro ao baixar/converter audio: {exc}", file=sys.stderr)
         sys.exit(1)
@@ -93,7 +101,10 @@ def criar_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--playlist",
         action="store_true",
-        help="Permite baixar playlists. Por padrao, baixa apenas um video.",
+        help=(
+            "Permite baixar playlists. Por padrao, baixa apenas um video. "
+            "Itens com erro sao pulados."
+        ),
     )
     return parser
 

@@ -19,16 +19,35 @@ git clone https://github.com/caiocdias/baixar_audio_youtube
 cd baixar_audio_youtube
 ```
 
+### Setup automatico
+
+Rode o setup para configurar Python, FFmpeg, ambiente virtual e dependencias:
+
+```bat
+setup.bat
+```
+
+Se Python ou FFmpeg forem instalados pelo setup, talvez seja necessario fechar e
+abrir o terminal e rodar `setup.bat` novamente para atualizar o `PATH`.
+
+Depois do setup, use o Python do ambiente virtual:
+
+```powershell
+.\.venv\Scripts\python.exe baixar_audio_youtube.py "https://www.youtube.com/watch?v=VIDEO_ID"
+```
+
+### Setup manual
+
 Crie um ambiente virtual:
 
 ```powershell
-python -m venv venv
+python -m venv .venv
 ```
 
 Ative o ambiente virtual:
 
 ```powershell
-.\venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 ```
 
 Atualize o `pip` e instale as dependencias:
@@ -82,6 +101,9 @@ Permitir o download de uma playlist:
 python baixar_audio_youtube.py "URL_DA_PLAYLIST" --playlist -o musicas
 ```
 
+Ao baixar uma playlist, se uma musica der erro, o script pula esse item e tenta
+baixar a proxima.
+
 ## Argumentos
 
 | Argumento | Descricao |
@@ -89,7 +111,7 @@ python baixar_audio_youtube.py "URL_DA_PLAYLIST" --playlist -o musicas
 | `url` | Link do video do YouTube. |
 | `-o`, `--output` | Pasta onde o MP3 sera salvo. Aceita caminho relativo ou absoluto. |
 | `-q`, `--qualidade` | Qualidade do MP3 em kbps. Padrao: `192`. |
-| `--playlist` | Permite baixar playlists. Sem essa opcao, baixa apenas um video. |
+| `--playlist` | Permite baixar playlists. Sem essa opcao, baixa apenas um video. Itens com erro sao pulados. |
 
 ## Autor
 
